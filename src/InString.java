@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 /**
  * Created by sergey on 14.11.2020
- */ //InString class(получаем входную строку и проверяем на условия задания)
+ */
+
 class InString {
     static String inStr;
 

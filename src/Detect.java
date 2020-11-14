@@ -1,6 +1,7 @@
 /**
  * Created by sergey on 14.11.2020
- */ //Class Detect(определяем 2 аргумента и оператор)
+ */
+
 class Detect {
     static String operator;
 

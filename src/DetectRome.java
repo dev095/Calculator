@@ -2,7 +2,6 @@
  * Created by sergey on 14.11.2020
  */
 
-//class DetectRome (определяем наличие римских цифр и выставляем флаг для  вывода результата)
 class DetectRome {
     static String inString = InString.getInStr ();
     static int indexNum1;

@@ -3,6 +3,7 @@ import java.util.List;
 /**
  * Created by sergey on 14.11.2020
  */
+
 class OutLine {
     static String outResult = "";
 

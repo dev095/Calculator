@@ -1,6 +1,7 @@
 /**
  * Created by sergey on 14.11.2020
  */
+
 class Calculate {
     static int arg1 = DetectRome.getIndexNum1 ();
     static int arg2 = DetectRome.getIndexNum2 ();
