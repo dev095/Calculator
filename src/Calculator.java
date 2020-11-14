@@ -1,5 +1,8 @@
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Calculator {
     public static void main(String[] args) {
@@ -7,8 +10,8 @@ public class Calculator {
         Detect.detectArguments ();
         Detect.detectOperator ();
         DetectRome.detectRome ();
-        Calculate.calculate ();
-        OutLine.outLine ();
+        Calculate.calculate();
+        OutLine.outLine (Calculate.getResult ());
         System.out.println ("Результат: " + OutLine.getOutResult ());
     }
 }
@@ -137,35 +140,53 @@ class Calculate {
 
 
 class OutLine{
-    static RomeNumbers[] romeNum = RomeNumbers.values ();
-
-    public static RomeNumbers[] getRomeNum() {
-        return romeNum;
-    }
-
-    static String outResult;
+    static String outResult = "";
     public static String getOutResult() {
         return outResult;
     }
 
-    static void outLine(){
+    public static String outLine(int number){
+
         if(DetectRome.isRomeMarker ()){
-            outResult = "V";
-            System.out.println ("rome flag on");
+            List<RomeNumbers> romeNumbers = RomeNumbers.getSortedRome ();
+            StringBuilder romeOutSb = new StringBuilder ();
+            int i = 0;
+
+            while(number > 0 && i < romeNumbers.size ()){
+                RomeNumbers now = romeNumbers.get(i);
+                if(now.getValue () <= number){
+                    romeOutSb.append(now.name ());
+                    number -= now.getValue ();
+                } else {
+                    i++;
+                }
+            }
+            outResult = romeOutSb.toString ();
+
         } else {
             outResult = Calculate.getResult () + "";
         }
+        return outResult;
     }
 }
 
 //RomeNumbers перечисления для вывода результата (если флаг romeMarker true)
 enum RomeNumbers {
-    I(1), II(2), III(3), IV(4), V(5),
-    VI(6), VII(7), VIII(8), IX(9), X(10),
-    XX(20), XXX(30), XL(40), L(50), LX(60),
-    LXX(70), LXXX(80), XC(90), C(100);
+    I(1),
+    IV(4),
+    V(5),
+    IX(9),
+    X(10),
+    XL(40),
+    L(50),
+    XC(90),
+    C(100),
+    CD(400),
+    D(500),
+    CM(900),
+    M(1000);
 
-    private int value;
+    private final int value;
 
     RomeNumbers(int value) {
         this.value = value;
@@ -173,5 +194,11 @@ enum RomeNumbers {
 
     public int getValue() {
         return value;
+    }
+
+    public static List<RomeNumbers> getSortedRome(){
+        return Arrays.stream (values ())
+                .sorted (Comparator.comparing ((RomeNumbers e) -> e.value).reversed ())
+                .collect(Collectors.toList());
     }
 }
