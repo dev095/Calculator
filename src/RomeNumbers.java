@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 /**
  * Created by sergey on 14.11.2020
  */ //RomeNumbers перечисления для вывода результата (если флаг romeMarker true)
-enum RomeNumbers {
+enum RomeNumbers implements Comparable<RomeNumbers>{
     I (1),
     IV (4),
     V (5),
